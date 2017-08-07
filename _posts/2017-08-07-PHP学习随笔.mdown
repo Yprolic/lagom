@@ -1,0 +1,86 @@
+---
+layout: post
+title: PHP学习随笔
+tags: [php, 随笔]
+categories:
+- blog
+---
+
+由于近期工作，需要在短期内学习PHP+Yii，在这里把我学习的过程和遇到的问题记录一下。
+---
+
+## PHP基础语法与其他语言的异同 
++ 嵌入PHP代码
+{% highlight php %}
+<?php
+    //php类似js，在html中嵌入由<?php>标记的php代码
+?>
+{% endhighlight %} 
+
++ 动态内容
+{% highlight php %}
+<?php
+    //php中变量统一由$开头，弱类型
+    $name = 'prolic';
+    //由echo输出到HTML中，"."符号拼接字符串
+    echo 'hello,$name';
+    echo "hello,$name";
+    echo 'hello,'.$name;
+    //注意单引号双引号的不同，单引号并不解释变量
+?>
+{% endhighlight %} 
+> hello,$name
+> hello,prolic
+> hello,prolic 
++ 条件控制与循环语句
+{% highlight php %}
+<?php
+    //$_POST 和 $_GET 分别对应post请求和get请求所传入的参数
+    if($_POST["isOne"] == True){
+        echo "One";
+    }
+    elseif($_GET['isTwo']){
+        echo "Two"
+    }
+    //PHP支持switch语句
+    //PHP支持foreach
+    foreach($Children as $child){
+        echo $child;
+    }
+?>
+{% endhighlight %} 
++ 数据结构
+{% highlight php %}
+<?php
+    //数组由array()创建，=>可表示key value的对应关系，用于创建数组
+    $arr = array(1,2,3);
+    $dict = array('One'=>1,'Two'=>2,'Three'=>3);
+    //each()为简单的迭代器，内部指针指向当前数组的下一个元素，list()用于拆分数组，下面则将Key-Value结构拆开
+    while (list($name,$num) = each($dict)){
+        echo "$name => $num<br />";
+    }
+?>
+{% endhighlight %} 
++ 函数与OOP
+{% highlight php %}
+<?php
+    //载入php文件
+    require('autoload.php');
+    //extends关键字用于继承，class及function用于创建类及函数，"\"代表命名空间
+    class Student extends \yii\db\ActiveRecord
+    {
+        public static function tableName()
+        {
+            return 'Student';
+        }
+    }
+    //匿名类
+    $myfunction = function($name){
+        echo $name;
+    }
+    //支持接口，final，override及函数式等
+    //通过ReflectionClass及一些简易函数支持反射
+?>
+{% endhighlight %} 
+
+
